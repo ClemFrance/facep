@@ -7,6 +7,8 @@ import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfi
 import { Button,TextField } from '@mui/material';
 import { db } from '@/settings/firebase.setting';
 import { collection,addDoc } from 'firebase/firestore';
+import { cdnImages } from '@/assets/demo_cdn_images';
+import { rangeOfRandNums } from '@/assets/range-of-rand-nums';
 
 export default function WritePost() {
     const {data:session} = useSession();
@@ -17,7 +19,8 @@ export default function WritePost() {
         await addDoc(collection(db,'posts'),{
             body:formInput,
             author:session.user.email,
-            postedAt:new Date().getTime()
+            postedAt:new Date().getTime(),
+            imageUrl:cdnImages[rangeOfRandNums(0,cdnImages.length)]
         })
         .then(() => {
             setFormInput('');
@@ -40,31 +43,19 @@ export default function WritePost() {
                     <TextField
                     multiline={true}
                     className='w-full'
+                    placeholder="what's on your mind ..."
                     value={formInput}
                     onChange={(text) => setFormInput(text.target.value)}/>
 
-                    <Button 
+                    {formInput.length > 0
+                    ? <Button 
                     variant='outlined'
-                    className={formInput.length > 0 ? 'block w-[100px]' : 'hidden'}
+                    className='block w-[100px]'
                     onClick={handleCreatePost}>Post</Button>
+                    : null}
                 </div>
             </div>
-            <hr style={{color:'black'}}/>
-
-            <div className='flex flex-row justify-around  gap-4'>
-                <button className='w-full p-2 hover:bg-gray-200 text-gray-500 rounded'>
-                    <VideoCameraFrontIcon sx={{ color: 'red' }} />
-                    Live video
-                </button>
-                <button className='w-full p-2 hover:bg-gray-200 text-gray-500 rounded'>
-                    <PhotoLibraryIcon sx={{ color: 'green' }} />
-                    Photo/video
-                </button>
-                <button className='w-full p-2 hover:bg-gray-200 text-gray-500 rounded'>
-                    <SentimentVerySatisfiedIcon sx={{ color: 'yellow' }} />
-                    Feelig/activity
-                </button>
-            </div>
+           
         </form>
     )
 }

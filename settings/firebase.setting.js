@@ -6,12 +6,12 @@ import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCsHE_KPrX8B6NmlX4oRo8A7NeW56fozxM",
-  authDomain: "facepal-c0e4e.firebaseapp.com",
-  projectId: "facepal-c0e4e",
-  storageBucket: "facepal-c0e4e.appspot.com",
-  messagingSenderId: "205455310577",
-  appId: "1:205455310577:web:b96fb3a94e43687ec23350"
+  apiKey: "AIzaSyCpvwkahYXy-Q67y6VjFGwWh_dMOcfvaEQ",
+  authDomain: "facepal-e014d.firebaseapp.com",
+  projectId: "facepal-e014d",
+  storageBucket: "facepal-e014d.appspot.com",
+  messagingSenderId: "928223672055",
+  appId: "1:928223672055:web:c4677e173e97b4943345f2"
 };
 
 // Initialize Firebase
